@@ -1,16 +1,19 @@
-// import logo from './logo.svg';
 import './App.scss';
 import Header from './layout/header/Header';
 import Footer from './layout/footer/Footer';
-import ExpenseItem from './components/expenses/expense-item/ExpenseItem';
+import Expenses from './components/expenses/Expenses';
 
 function App() {
+
   return (
     <div className="App">
       <Header />
 
       <main>
-        <ExpenseItem />
+        <section className="expenses">
+          <h1>Expenses List</h1>
+          <Expenses />
+        </section>
       </main>
 
       <Footer />

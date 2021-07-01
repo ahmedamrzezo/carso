@@ -1,18 +1,14 @@
+import ExpenseDate from '../expense-date/ExpenseDate';
 import './ExpenseItem.scss';
+import '../../../styles/layout/_card.scss';
 
-function ExpenseItem() {
-	const expense = {
-		name: 'My exp',
-		description: 'Desc',
-		date: new Date().toDateString()
-	};
-	// const expenseName = 'My exp';
+function ExpenseItem({ expense }) {
 	return (
-		<div className="expense-item">
+		<div className="card expense-item">
+			<ExpenseDate date={expense.date} />
 			<div>
 				<h4>{expense.name}</h4>
 				<p>{expense.description}</p>
-				<small>{expense.date}</small>
 			</div>
 		</div>
 	);

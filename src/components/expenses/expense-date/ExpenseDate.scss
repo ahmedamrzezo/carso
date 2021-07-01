@@ -1,0 +1,21 @@
+@import 'styles/colors';
+@import 'styles/variables';
+
+.date {
+	background-color: $primary_light_color;
+	border-radius: $border_radius;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	color: $primary_dark_color;
+	min-width: 120px;
+	padding: 10px;
+	aspect-ratio: 1 / 1;
+
+	&__day {
+		font-size: 200%;
+		font-weight: bold;
+		flex-basis: 100%;
+	}
+}
