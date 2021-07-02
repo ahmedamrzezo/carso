@@ -23,4 +23,23 @@ router.post('/expenses', async (req, res) => {
 	}
 });
 
+router.delete('/expenses/:id', async (req, res) => {
+	const _id = req.params.id;
+	try {
+		if (_id === 'all') {
+			await Expense.deleteMany();
+			HelperService.handleSuccess(res, []);
+			return;
+		}
+		const expense = await Expense.deleteOne({ _id });
+		if (expense.deletedCount) {
+			return HelperService.handleSuccess(res, {});
+		}
+		throw new Error('Not Found!');
+
+	} catch (error) {
+		HelperService.handleError(res, error, 400);
+	}
+});
+
 module.exports = router;
