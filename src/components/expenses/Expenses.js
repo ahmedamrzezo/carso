@@ -1,18 +1,20 @@
-import './Expenses.scss';
-
 import ExpenseItem from "./expense-item/ExpenseItem";
+import { useEffect, useState } from 'react';
 
 function Expenses() {
-	const expenses = [{
-		name: 'My exp',
-		description: 'Desc',
-		date: new Date()
-	},
-	{
-		name: 'My exp2',
-		description: 'Desc 2',
-		date: new Date()
-	}];
+
+	const [expenses, setExpenses] = useState([]);
+
+	useEffect(() => getExpenses(), []);
+
+	const getExpenses = async () => {
+		try {
+			const res = await fetch('https://expensat-api.herokuapp.com/expenses');
+			setExpenses(await res.json());
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	return (
 		<div className="expenses-list">
