@@ -1,4 +1,9 @@
 .expense-item {
 	display: flex;
 	column-gap: 10px;
+
+	&__btn {
+		margin-inline-start: auto;
+		align-self: center;
+	}
 }

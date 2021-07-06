@@ -17,8 +17,9 @@ function Expenses() {
 	};
 
 	return (
-		<div className="expenses-list">
+		<div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-10">
 			{expenses.map((expense, id) => <ExpenseItem expense={expense} key={id} />)}
+			<ExpenseItem key="new" empty={true} />
 		</div>);
 }
 
