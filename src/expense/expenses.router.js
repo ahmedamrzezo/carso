@@ -4,7 +4,7 @@ const Expense = require('./expenses.model');
 
 const router = new express.Router();
 
-router.get('/expenses', async (req, res) => {
+router.get('/api/expenses', async (req, res) => {
 	try {
 		const expenses = await Expense.find();
 		HelperService.handleSuccess(res, expenses, 200);
@@ -13,7 +13,7 @@ router.get('/expenses', async (req, res) => {
 	}
 });
 
-router.post('/expenses', async (req, res) => {
+router.post('/api/expenses', async (req, res) => {
 	const expense = new Expense(req.body);
 	try {
 		await expense.save();
@@ -23,7 +23,7 @@ router.post('/expenses', async (req, res) => {
 	}
 });
 
-router.delete('/expenses/:id', async (req, res) => {
+router.delete('/api/expenses/:id', async (req, res) => {
 	const _id = req.params.id;
 	try {
 		if (_id === 'all') {
