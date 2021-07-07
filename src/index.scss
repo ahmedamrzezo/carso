@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+	.form-group {
+		@apply flex;
+	}
+	.form-control {
+		@apply p-4 rounded-xl border-2 border-primary_color_50 h-16 w-full font-light text-2xl focus:border-primary_color bg-transparent;
+	}
+	textarea.form-control {
+		@apply resize-none h-24;
+	}
+	.form-control {
+		@apply p-4 rounded-xl border-2 border-primary_color_50 h-16 w-full font-light text-2xl focus:border-primary_color;
+	}
+}
+
 html {
 	font-size: 62.5%;
 }
