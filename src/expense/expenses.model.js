@@ -18,6 +18,14 @@ const expenseSch = new mongoose.Schema({
 		type: Number,
 		required: true
 	}
+}, {
+	timestamps: true
+});
+
+expenseSch.set('toJSON', {
+	virtuals: true,
+	versionKey: false,
+	transform: function (doc, ret) { delete ret._id; }
 });
 
 const Expense = mongoose.model('Expense', expenseSch);
