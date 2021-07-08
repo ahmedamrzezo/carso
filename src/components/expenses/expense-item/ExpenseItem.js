@@ -1,6 +1,5 @@
 import ExpenseDate from '../expense-date/ExpenseDate';
 import './ExpenseItem.scss';
-import '../../../styles/layout/_card.scss';
 
 export default function ExpenseItem({ expense, empty, onAddNewExpenseComp }) {
 
@@ -14,7 +13,7 @@ export default function ExpenseItem({ expense, empty, onAddNewExpenseComp }) {
 
 	return (
 		<div className="p-6 shadow-xl rounded-xl flex flex-wrap justify-between gap-8 border-2 border-primary_color_50">
-			<div>
+			<div className="max-w-65">
 				<h4 className="text-primary_color font-semibold">{expense.title}</h4>
 				<p className="text-3xl">{expense.description}</p>
 			</div>
