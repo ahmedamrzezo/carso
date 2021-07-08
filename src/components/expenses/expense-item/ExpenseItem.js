@@ -1,3 +1,4 @@
+import { PlusIcon } from '@heroicons/react/outline';
 import ExpenseDate from '../expense-date/ExpenseDate';
 import './ExpenseItem.scss';
 
@@ -6,7 +7,7 @@ export default function ExpenseItem({ expense, empty, onAddNewExpenseComp }) {
 	if (empty) {
 		return (
 			<div className="rounded-xl flex justify-center items-center border-4 border-dashed border-primary_color cursor-pointer" onClick={onAddNewExpenseComp}>
-				<span className="text-8xl border-4 border-dashed border-primary_color w-40 h-40 rounded-full flex justify-center items-center text-primary_color">+</span>
+				<span className="text-8xl border-4 border-dashed border-primary_color w-40 h-40 rounded-full flex justify-center items-center text-primary_color"><PlusIcon className="w-16 text-primary_color"></PlusIcon></span>
 			</div>
 		);
 	}
