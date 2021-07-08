@@ -2,6 +2,7 @@ import ExpenseItem from "./expense-item/ExpenseItem";
 import { useEffect, useState } from 'react';
 import { AddExpense } from "./AddExpense/AddExpense";
 import { environment } from "../../environment/environment";
+import { Filter } from "../shared/filter/Filter";
 
 function Expenses() {
 
@@ -51,17 +52,27 @@ function Expenses() {
 		}
 	};
 
+	const filterExpenses = (year) => {
+		console.log(year);
+	};
 
 	return (
-		<div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 auto-rows-fr gap-10">
-			{expenses.map((expense) => {
-				if (expense.editable) {
-					return <AddExpense key={expense.id} onExpenseAdd={insertExpense} id={expense.id} />;
-				}
-				return <ExpenseItem expense={expense} key={expense.id} editable={expense.editable} />;
-			})}
-			<ExpenseItem key="empty" empty={true} onAddNewExpenseComp={addNewExpense} />
-		</div>);
+		<section>
+			<h1 className="mb-16">Expenses List</h1>
+
+			<Filter onFilter={filterExpenses} />
+
+			<div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 auto-rows-fr gap-10">
+				{expenses.map((expense) => {
+					if (expense.editable) {
+						return <AddExpense key={expense.id} onExpenseAdd={insertExpense} id={expense.id} />;
+					}
+					return <ExpenseItem expense={expense} key={expense.id} editable={expense.editable} />;
+				})}
+				<ExpenseItem key="empty" empty={true} onAddNewExpenseComp={addNewExpense} />
+			</div>
+		</section>
+	);
 }
 
 export default Expenses;
