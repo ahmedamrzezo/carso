@@ -11,10 +11,9 @@ function App() {
 
       <main>
         <div className="container mx-auto">
-          <section>
-            <h1>Expenses List</h1>
-            <Expenses />
-          </section>
+
+          <Expenses />
+
         </div>
       </main>
 
