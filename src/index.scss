@@ -7,13 +7,10 @@
 		@apply flex;
 	}
 	.form-control {
-		@apply p-4 rounded-xl border-2 border-primary_color_50 h-16 w-full font-light text-2xl focus:border-primary_color bg-transparent;
+		@apply px-4 py-2 rounded-xl border-2 border-primary_color_50 h-20 w-full font-light text-2xl focus:outline-none focus:border-primary_color bg-transparent;
 	}
 	textarea.form-control {
-		@apply resize-none h-24;
-	}
-	.form-control {
-		@apply p-4 rounded-xl border-2 border-primary_color_50 h-16 w-full font-light text-2xl focus:border-primary_color;
+		@apply resize-none h-28;
 	}
 }
 
