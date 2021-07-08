@@ -2,7 +2,7 @@ import Button from '../../shared/ui/button/Button';
 import ExpenseDate from '../expense-date/ExpenseDate';
 import './AddExpense.scss';
 
-export const AddExpense = ({ onExpenseAdd }) => {
+export const AddExpense = ({ id, onExpenseAdd }) => {
 
 	const getFormValues = (form, names) => names.map((name) => form[name].value);
 
@@ -15,7 +15,7 @@ export const AddExpense = ({ onExpenseAdd }) => {
 		expense.amount = +expense.amount;
 		expense.date = new Date();
 
-		return onExpenseAdd(expense);
+		return onExpenseAdd(expense, id);
 	};
 
 
