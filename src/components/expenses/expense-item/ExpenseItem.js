@@ -2,11 +2,11 @@ import ExpenseDate from '../expense-date/ExpenseDate';
 import './ExpenseItem.scss';
 import '../../../styles/layout/_card.scss';
 
-export default function ExpenseItem({ expense, empty }) {
+export default function ExpenseItem({ expense, empty, onAddNewExpenseComp }) {
 
 	if (empty) {
 		return (
-			<div className="rounded-xl flex justify-center items-center border-4 border-dashed border-primary_color cursor-pointer">
+			<div className="rounded-xl flex justify-center items-center border-4 border-dashed border-primary_color cursor-pointer" onClick={onAddNewExpenseComp}>
 				<span className="text-8xl border-4 border-dashed border-primary_color w-40 h-40 rounded-full flex justify-center items-center text-primary_color">+</span>
 			</div>
 		);
@@ -20,7 +20,7 @@ export default function ExpenseItem({ expense, empty }) {
 			</div>
 			<ExpenseDate date={expense.date} />
 			<div className="flex-grow w-full text-center">
-				<mark className="rounded-xl p-2 bg-primary_color text-primary_light_color ring-4 ring-primary_color_50 inline-block">${expense.expense}</mark>
+				<mark className="rounded-xl p-2 bg-primary_color text-primary_light_color ring-4 ring-primary_color_50 inline-block">${expense.amount}</mark>
 			</div>
 		</div >
 	);
