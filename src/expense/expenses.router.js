@@ -5,8 +5,9 @@ const Expense = require('./expenses.model');
 const router = new express.Router();
 
 router.get('/api/expenses', async (req, res) => {
+	const filter = req.body.filter;
 	try {
-		const expenses = await Expense.find();
+		const expenses = await Expense.find(filter);
 		HelperService.handleSuccess(res, expenses, 200);
 	} catch (error) {
 		HelperService.handleError(res, error, 500);
