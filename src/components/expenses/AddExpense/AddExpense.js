@@ -1,6 +1,7 @@
 import Button from '../../shared/ui/button/Button';
 import ExpenseDate from '../expense-date/ExpenseDate';
 import './AddExpense.scss';
+import { CalendarIcon } from '@heroicons/react/outline';
 
 export const AddExpense = ({ id, onExpenseAdd }) => {
 
@@ -29,7 +30,9 @@ export const AddExpense = ({ id, onExpenseAdd }) => {
 					<textarea className="form-control" placeholder="Enter description" name="description"></textarea>
 				</div>
 			</div>
-			<ExpenseDate date={new Date()} />
+			<ExpenseDate>
+				<CalendarIcon />
+			</ExpenseDate>
 			<div className="flex-grow w-full text-center flex justify-between">
 				<mark className="rounded-xl p-2 bg-primary_color text-primary_light_color ring-4 ring-primary_color_50 inline-block">
 					<div className="form-group">
