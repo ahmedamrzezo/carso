@@ -1,6 +1,4 @@
-import ExpenseItem from "./expense-item/ExpenseItem";
 import { useEffect, useState } from 'react';
-import { AddExpense } from "./AddExpense/AddExpense";
 import { environment } from "../../environment/environment";
 import { Filter } from "../shared/filter/Filter";
 import { ExpensesList } from "./expenses-list/ExpensesList";
@@ -75,7 +73,10 @@ function Expenses() {
 
 			<Filter onFilter={filterExpenses} />
 
-			<ExpensesList expenses={expenses} onInsertExpense={insertExpense} onAddNew={addNewExpense} />
+			<ExpensesList
+				expenses={expenses}
+				onInsertExpense={insertExpense}
+				onAddNew={addNewExpense} />
 		</section>
 	);
 }
