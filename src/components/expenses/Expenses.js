@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { AddExpense } from "./AddExpense/AddExpense";
 import { environment } from "../../environment/environment";
 import { Filter } from "../shared/filter/Filter";
+import { ExpensesList } from "./expenses-list/ExpensesList";
 
 function Expenses() {
 
@@ -10,9 +11,16 @@ function Expenses() {
 
 	useEffect(() => getExpenses(), []);
 
-	const getExpenses = async () => {
+	const getExpenses = async (filter = {}) => {
+		const url = new URL(`${environment.apiUrl}/expenses`);
+		const filterKeys = Object.keys(filter);
+
+		if (filterKeys.length) {
+			filterKeys.forEach(key => url.searchParams.append(key, filter[key]));
+		}
+
 		try {
-			const res = await fetch(`${environment.apiUrl}/expenses`);
+			const res = await fetch(url);
 			setExpenses(await res.json());
 		} catch (error) {
 			console.error(error);
@@ -53,7 +61,12 @@ function Expenses() {
 	};
 
 	const filterExpenses = (year) => {
-		console.log(year);
+		const filter = {};
+		filter['date'] = {
+			$gt: new Date(year).toJSON(),
+			$lt: new Date((+year + 1) + '').toJSON()
+		};
+		getExpenses({ filter: JSON.stringify(filter) });
 	};
 
 	return (
@@ -62,15 +75,7 @@ function Expenses() {
 
 			<Filter onFilter={filterExpenses} />
 
-			<div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 auto-rows-fr gap-10">
-				{expenses.map((expense) => {
-					if (expense.editable) {
-						return <AddExpense key={expense.id} onExpenseAdd={insertExpense} id={expense.id} />;
-					}
-					return <ExpenseItem expense={expense} key={expense.id} editable={expense.editable} />;
-				})}
-				<ExpenseItem key="empty" empty={true} onAddNewExpenseComp={addNewExpense} />
-			</div>
+			<ExpensesList expenses={expenses} onInsertExpense={insertExpense} onAddNew={addNewExpense} />
 		</section>
 	);
 }
