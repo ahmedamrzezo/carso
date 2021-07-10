@@ -6,7 +6,6 @@ const router = new express.Router();
 
 router.get('/api/expenses', async (req, res) => {
 	const filter = JSON.parse(req.query.filter || '{}');
-	console.log(filter);
 	try {
 		const expenses = await Expense.find(filter);
 		HelperService.handleSuccess(res, expenses, 200);
