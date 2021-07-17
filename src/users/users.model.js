@@ -4,6 +4,8 @@ const validator = require('validator');
 
 const bcrypt = require('bcrypt');
 
+const jwt = require('jsonwebtoken');
+
 const userSch = new mongoose.Schema({
 	fName: {
 		type: String,
@@ -42,12 +44,12 @@ const userSch = new mongoose.Schema({
 			}
 		},
 	},
-	// tokens: [{
-	// 	token: {
-	// 		type: String,
-	// 		required: true,
-	// 	},
-	// }]
+	tokens: [{
+		token: {
+			type: String,
+			required: true,
+		},
+	}]
 }, {
 	timestamps: true,
 });
@@ -90,7 +92,14 @@ userSch.statics.verifyCredentials = async ({ email, password }) => {
 	}
 
 	return user;
+};
 
+userSch.methods.generateToken = async function () {
+	const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT_SECRET);
+	this.tokens = this.tokens.concat({ token });
+	await this.save();
+
+	return token;
 };
 
 const User = mongoose.model('User', userSch);
