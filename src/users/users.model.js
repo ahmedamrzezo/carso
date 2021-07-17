@@ -52,6 +52,19 @@ const userSch = new mongoose.Schema({
 	timestamps: true,
 });
 
+userSch.methods.toJSON = function () {
+	const user = this.toObject({
+		virtuals: true,
+	});
+
+	delete user.password;
+	delete user.tokens;
+	delete user._id;
+	delete user.__v;
+
+	return user;
+};
+
 userSch.pre('save', async function (next) {
 	const userPassword = this.password;
 
