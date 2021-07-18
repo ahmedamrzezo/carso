@@ -1,10 +1,17 @@
 const express = require('express');
+const auth = require('../middleware/auth');
 const HelperService = require('../utils/helper');
 const User = require('./users.model');
 const userRouter = new express.Router();
 
-userRouter.get('/api/users/profile', (req, res) => {
-	res.send('asdas');
+userRouter.get('/api/users/profile', auth, async (req, res) => {
+	try {
+		await req.user.populate({ path: 'expenses' }).execPopulate();
+
+		HelperService.handleSuccess(res, req.user, 200);
+	} catch (error) {
+		HelperService.handleError(res, error, 403);
+	}
 });
 
 userRouter.post('/api/users/login', async (req, res) => {

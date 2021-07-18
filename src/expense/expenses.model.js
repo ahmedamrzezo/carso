@@ -17,6 +17,11 @@ const expenseSch = new mongoose.Schema({
 	amount: {
 		type: Number,
 		required: true
+	},
+	createdBy: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
 	}
 }, {
 	timestamps: true
@@ -25,7 +30,11 @@ const expenseSch = new mongoose.Schema({
 expenseSch.set('toJSON', {
 	virtuals: true,
 	versionKey: false,
-	transform: function (doc, ret) { delete ret._id; }
+	transform: function (doc, ret) {
+		delete ret._id;
+		delete ret.__v;
+		delete ret.createdBy;
+	}
 });
 
 const Expense = mongoose.model('Expense', expenseSch);
