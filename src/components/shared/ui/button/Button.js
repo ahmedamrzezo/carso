@@ -1,6 +1,6 @@
 import './Button.scss';
 
-const Button = ({ btnType, children, clickHandler, type }) => {
+const Button = ({ className, btnType, children, clickHandler, type }) => {
 	const shadow = 'shadow hover:shadow-xl';
 	const size = 'w-48 h-20 ';
 	const hover = 'transform hover:-translate-y-2 transition-all';
@@ -11,7 +11,7 @@ const Button = ({ btnType, children, clickHandler, type }) => {
 		text: `p-4 text-primary_color`
 	};
 
-	let classes = `font-semibold text-2xl flex items-center justify-center capitalize cursor-pointer m delay-75 ${types[btnType]}`;
+	let classes = `font-semibold text-2xl flex items-center justify-center capitalize cursor-pointer m delay-75 ${types[btnType]} ${className}`;
 
 	return (
 		<button className={classes} onClick={clickHandler} type={type}>
