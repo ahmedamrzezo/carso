@@ -30,9 +30,9 @@ userRouter.post('/api/users/login', async (req, res) => {
 userRouter.post('/api/users/register', async (req, res) => {
 	const user = new User(req.body);
 
-	const token = await user.generateToken();
 
 	try {
+		const token = await user.generateToken();
 		await user.save();
 		HelperService.handleSuccess(res, { user, token }, 201);
 	} catch (error) {
