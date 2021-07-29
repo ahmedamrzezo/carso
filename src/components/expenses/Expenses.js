@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { environment } from "../../environment/environment";
 import { Filter } from "../shared/filter/Filter";
+import { includeAuth } from '../shared/utils/Http';
 import { ExpensesList } from "./expenses-list/ExpensesList";
 
 function Expenses() {
-
 	const [expenses, setExpenses] = useState([]);
-
-	useEffect(() => getExpenses(), []);
 
 	const getExpenses = async (filter = {}) => {
 		const url = new URL(`${environment.apiUrl}/expenses`);
@@ -18,12 +16,18 @@ function Expenses() {
 		}
 
 		try {
-			const res = await fetch(url);
-			setExpenses(await res.json());
+			const res = await fetch(url, includeAuth());
+			const expensesData = await res.json();
+			if (!expensesData.error) {
+				return setExpenses(expensesData);
+			}
+			throw Error(expensesData);
 		} catch (error) {
 			console.error(error);
 		}
 	};
+
+	useEffect(() => getExpenses(), []);
 
 	const addNewExpense = () => {
 		const newExpense = {
@@ -39,17 +43,16 @@ function Expenses() {
 
 	const insertExpense = async (expense, id) => {
 		try {
-			const res = await fetch(`${environment.apiUrl}/expenses`, {
+			const res = await fetch(`${environment.apiUrl}/expenses`, includeAuth({
 				method: 'POST',
 				headers: {
 					'Accept': 'application/json',
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(expense)
-			});
+			}));
 			const data = await res.json();
 			if (!data.errors) {
-				console.log(id);
 				return setExpenses([...expenses.filter((ex) => ex.id !== id), data]);
 			}
 			throw new Error(data.message);
