@@ -2,17 +2,16 @@ import Button from '../../shared/ui/button/Button';
 import ExpenseDate from '../expense-date/ExpenseDate';
 import './AddExpense.scss';
 import { CalendarIcon } from '@heroicons/react/outline';
+import { getFormValues } from '../../shared/utils/Form';
 
 export const AddExpense = ({ id, onExpenseAdd }) => {
-
-	const getFormValues = (form, names) => names.map((name) => form[name].value);
 
 	const formSubmitted = (ev) => {
 		ev.preventDefault();
 		const form = ev.target;
 
 		const values = getFormValues(form.elements, ['title', 'description', 'amount']);
-		const expense = new Expense(...values);
+		const expense = new Expense(...Object.values(values));
 		expense.amount = +expense.amount;
 		expense.date = new Date();
 
