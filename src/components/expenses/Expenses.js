@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { environment } from "../../environment/environment";
 import { Filter } from "../shared/filter/Filter";
-import { includeAuth } from '../shared/utils/Http';
+import { authorize } from '../shared/utils/Http';
 import { ExpensesList } from "./expenses-list/ExpensesList";
 
 function Expenses() {
@@ -16,7 +16,7 @@ function Expenses() {
 		}
 
 		try {
-			const res = await fetch(url, includeAuth());
+			const res = await fetch(url, authorize());
 			const expensesData = await res.json();
 			if (!expensesData.error) {
 				return setExpenses(expensesData);
@@ -43,7 +43,7 @@ function Expenses() {
 
 	const insertExpense = async (expense, id) => {
 		try {
-			const res = await fetch(`${environment.apiUrl}/expenses`, includeAuth({
+			const res = await fetch(`${environment.apiUrl}/expenses`, authorize({
 				method: 'POST',
 				headers: {
 					'Accept': 'application/json',
