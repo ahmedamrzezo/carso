@@ -1,6 +1,8 @@
 import { environment } from '../../../environment/environment';
 import Button from '../../shared/ui/button/Button';
+import FormControl from '../../shared/ui/form-control/FormControl';
 import { getFormValues } from '../../shared/utils/Form';
+import { getOptions } from '../../shared/utils/Http';
 
 const Login = () => {
 	const login = async (ev) => {
@@ -9,11 +11,7 @@ const Login = () => {
 
 		const res = await fetch(`${environment.apiUrl}/users/login`, {
 			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json; charset=utf-8',
-			},
-			body: JSON.stringify(values),
+			...getOptions(values),
 		});
 
 		const userData = await res.json();
@@ -29,7 +27,8 @@ const Login = () => {
 				{/* email */}
 
 				<div className="form-group w-100 my-4">
-					<input
+					<FormControl
+						controlType={'input'}
 						type="email"
 						placeholder="Enter your email"
 						className="form-control"
@@ -42,7 +41,8 @@ const Login = () => {
 				{/* password */}
 
 				<div className="form-group">
-					<input
+					<FormControl
+						controlType={'input'}
 						type="password"
 						placeholder="Enter your password"
 						className="form-control"

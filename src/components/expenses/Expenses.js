@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { environment } from "../../environment/environment";
 import { Filter } from "../shared/filter/Filter";
-import { authorize } from '../shared/utils/Http';
+import { authorize, getOptions } from '../shared/utils/Http';
 import { ExpensesList } from "./expenses-list/ExpensesList";
 
 function Expenses() {
@@ -45,11 +45,7 @@ function Expenses() {
 		try {
 			const res = await fetch(`${environment.apiUrl}/expenses`, authorize({
 				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(expense)
+				...getOptions(expense),
 			}));
 			const data = await res.json();
 			if (!data.errors) {

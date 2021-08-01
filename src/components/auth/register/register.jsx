@@ -1,6 +1,7 @@
 import { environment } from '../../../environment/environment';
 import Button from '../../shared/ui/button/Button';
 import { getFormValues } from '../../shared/utils/Form';
+import { getOptions } from '../../shared/utils/Http';
 
 const Register = () => {
 	const register = async (ev) => {
@@ -19,11 +20,7 @@ const Register = () => {
 
 		const res = await fetch(`${environment.apiUrl}/users/register`, {
 			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json; charset=utf-8',
-			},
-			body: JSON.stringify(values),
+			...getOptions(values),
 		});
 
 		const userData = await res.json();

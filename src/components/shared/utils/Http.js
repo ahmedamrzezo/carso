@@ -10,3 +10,17 @@ export const authorize = (options = {}) => {
 		...options
 	};
 };
+
+
+export const getOptions = (body) => {
+	const ops = {
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json; charset=utf-8',
+		}
+	};
+	if (body) {
+		ops.body = JSON.stringify(body);
+	}
+	return ops;
+};
