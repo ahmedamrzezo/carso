@@ -22,6 +22,11 @@ const expenseSch = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
 		required: true
+	},
+	categoryId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Category',
+		required: true
 	}
 }, {
 	timestamps: true
@@ -35,6 +40,13 @@ expenseSch.set('toJSON', {
 		delete ret.__v;
 		delete ret.createdBy;
 	}
+});
+
+expenseSch.virtual('category', {
+	ref: 'Category',
+	localField: 'categoryId',
+	foreignField: '_id',
+	justOne: true
 });
 
 const Expense = mongoose.model('Expense', expenseSch);

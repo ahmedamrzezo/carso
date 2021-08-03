@@ -1,4 +1,5 @@
 const express = require('express');
+const Category = require('../categories/categories.model');
 const auth = require('../middleware/auth');
 const HelperService = require('../utils/helper');
 const Expense = require('./expenses.model');
@@ -6,13 +7,20 @@ const Expense = require('./expenses.model');
 const router = new express.Router();
 
 router.get('/api/expenses', auth, async (req, res) => {
-	const filter = JSON.parse(req.query.filter || '{}');
+	const match = JSON.parse(req.query.filter || '{}');
 	try {
-		await req.user.populate({
-			path: 'expenses',
-			match: filter
-		}).execPopulate();
-		HelperService.handleSuccess(res, req.user.expenses, 200);
+		let expenses;
+
+		if (match.category) {
+			expenses = await Expense.find({ createdBy: req.user._id }, null, match).populate({ path: 'category' });
+		} else {
+			await req.user.populate({
+				path: 'expenses',
+				match
+			}).execPopulate();
+		}
+
+		HelperService.handleSuccess(res, expenses || req.user.expenses, 200);
 	} catch (error) {
 		HelperService.handleError(res, error, 500);
 	}
