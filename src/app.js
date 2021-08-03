@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const expenseRouter = require('./expense/expenses.router');
 const userRouter = require('./users/user.router');
+const categoryRouter = require('./categories/categories.router');
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.use(cors());
 
 app.use(express.json());
 
-const routers = [expenseRouter, userRouter];
+const routers = [expenseRouter, userRouter, categoryRouter];
 
 routers.forEach((router) => app.use(router));
 
