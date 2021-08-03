@@ -8,15 +8,19 @@ const router = new express.Router();
 
 router.get('/api/expenses', auth, async (req, res) => {
 	const match = JSON.parse(req.query.filter || '{}');
+	const options = JSON.parse(req.query.options || '{}');
+
 	try {
 		let expenses;
 
 		if (match.category) {
-			expenses = await Expense.find({ createdBy: req.user._id }, null, match).populate({ path: 'category' });
+			delete match.category;
+			expenses = await Expense.find({ createdBy: req.user._id, ...match }, null, options).populate({ path: 'category' });
 		} else {
 			await req.user.populate({
 				path: 'expenses',
-				match
+				match,
+				options
 			}).execPopulate();
 		}
 
