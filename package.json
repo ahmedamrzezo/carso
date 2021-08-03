@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ahmedamrzezo/zozz-api.git"
+    "url": "git+ssh://git@github.com:ahmedamrzezo/carso.git"
   },
   "author": "ahmedamrzezo",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ahmedamrzezo/zozz-api/issues"
+    "url": "https://github.com/ahmedamrzezo/carso/issues"
   },
-  "homepage": "https://github.com/ahmedamrzezo/zozz-api#readme",
+  "homepage": "https://github.com/ahmedamrzezo/carso#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
