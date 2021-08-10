@@ -4,7 +4,7 @@
 
 @layer components {
 	.form-group {
-		@apply flex;
+		@apply flex items-center;
 	}
 	.form-control {
 		@apply px-4 py-2 rounded-xl border-2 border-primary_color_50 h-20 w-full font-light text-2xl focus:outline-none focus:border-primary_color bg-transparent;
