@@ -12,6 +12,14 @@
 	textarea.form-control {
 		@apply resize-none h-28;
 	}
+
+	.nav-links {
+		@apply flex items-center gap-8;
+
+		&__link-item {
+			@apply text-primary_color hover:text-secondary_color transition-colors text-3xl;
+		}
+	}
 }
 
 html {
