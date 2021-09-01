@@ -14,6 +14,7 @@ export const AddExpense = ({ id, onExpenseAdd }) => {
 		const expense = new Expense(...Object.values(values));
 		expense.amount = +expense.amount;
 		expense.date = new Date();
+		expense.categoryId = '611c35da4b032c001562d87f';
 
 		return onExpenseAdd(expense, id);
 	};

@@ -1,3 +1,4 @@
+import React from 'react';
 import './Button.scss';
 
 const Button = ({
@@ -32,4 +33,4 @@ const Button = ({
 	);
 };
 
-export default Button;
+export default React.memo(Button);
