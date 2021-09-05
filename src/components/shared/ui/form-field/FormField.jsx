@@ -19,6 +19,8 @@ const FormField = ({
 		[name]: useRef(),
 	};
 
+	const [touched, setTouched] = useState(false);
+
 	const [value, setValue] = useState(null);
 
 	useEffect(() => {
@@ -39,6 +41,7 @@ const FormField = ({
 
 	const onBlur = () => {
 		fieldBlur(refs[name].current.value);
+		setTouched(true);
 	};
 
 	const onFocus = () => {
@@ -48,13 +51,10 @@ const FormField = ({
 	const types = {
 		input: (
 			<input
-				className={`${controlClasses} ${
-					isValid === undefined
-						? ''
-						: isValid === false
-						? 'border-danger'
-						: 'border-success'
-				}`}
+				className={`
+				${controlClasses} 
+				${!isValid && touched && 'border-danger'}
+				${isValid && touched && 'border-success'}`}
 				placeholder={placeholder}
 				name={name}
 				autoComplete={autoComplete}
