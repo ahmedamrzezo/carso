@@ -5,6 +5,9 @@ import Expenses from './components/expenses/Expenses';
 import Login from './components/auth/login/login';
 import AuthContext from './store/auth-context';
 import { useContext } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Main from './layout/main/Main';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -13,15 +16,24 @@ function App() {
     <div className="App">
       <Header />
 
-      {
-        !authCtx.isLogged &&
-        <Login />
-      }
-      <main className="container mx-auto">
+      <Main>
+        <Switch>
+          <Redirect path="/" to="/dashboard" exact />
 
-        <Expenses />
+          <Route path="/login">
+            {
+              !authCtx.isLogged &&
+              <Login />
+            }
+            {
+              authCtx.isLogged &&
+              <Redirect to="/dashboard" />
+            }
+          </Route>
 
-      </main>
+          <Route path="/dashboard" component={Dashboard} />
+        </Switch>
+      </Main>
 
       <Footer />
     </div>
