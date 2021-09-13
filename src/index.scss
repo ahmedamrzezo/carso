@@ -18,6 +18,9 @@
 
 		&__link-item {
 			@apply text-primary_color hover:text-secondary_color transition-colors text-3xl;
+			&--active {
+				@apply font-bold;
+			}
 		}
 	}
 }
