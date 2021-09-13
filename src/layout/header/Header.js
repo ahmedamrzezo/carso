@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import Button from '../../components/shared/ui/button/Button';
 import AuthContext from '../../store/auth-context';
 import './Header.scss';
@@ -14,17 +15,17 @@ function Header() {
 					CarsCoins
 				</div>
 				<nav className="nav-links flex-end">
-					<a className="nav-links__link-item" href="/#">
+					<NavLink className="nav-links__link-item" to="/dashboard" activeClassName="nav-links__link-item--active">
 						Dashboard
-					</a>
-					<a className="nav-links__link-item" href="/#">
+					</NavLink>
+					<NavLink className="nav-links__link-item" to="/expenses" activeClassName="nav-links__link-item--active">
 						My Expenses
-					</a>
+					</NavLink>
 					{
 						authCtx.isLogged &&
-						<a className="nav-links__link-item" href="/#">
+						<NavLink className="nav-links__link-item" to="/profile" activeClassName="nav-links__link-item--active">
 							Profile
-						</a>
+						</NavLink>
 					}
 					{
 						!authCtx.isLogged &&
