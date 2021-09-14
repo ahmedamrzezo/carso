@@ -32,6 +32,8 @@ function App() {
           </Route>
 
           <Route path="/dashboard" component={Dashboard} />
+
+          <Route path="/expenses" component={Expenses} />
         </Switch>
       </Main>
 
