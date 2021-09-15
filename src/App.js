@@ -34,6 +34,12 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
 
           <Route path="/expenses" component={Expenses} />
+
+          <Route path="/404">
+            Not Found
+          </Route>
+
+          <Redirect path="*" to="/404" />
         </Switch>
       </Main>
 
