@@ -40,6 +40,10 @@
 
 	.card {
 		@apply p-6 shadow-xl rounded-xl border-2 border-primary_color_50;
+
+		&__title {
+			@apply font-bold text-3xl border-b-2 border-primary_color_50 pb-6 capitalize;
+		}
 	}
 }
 
