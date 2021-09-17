@@ -1,5 +1,4 @@
 const express = require('express');
-const Category = require('../categories/categories.model');
 const auth = require('../middleware/auth');
 const HelperService = require('../utils/helper');
 const Expense = require('./expenses.model');

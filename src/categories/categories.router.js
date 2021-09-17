@@ -40,6 +40,29 @@ router.get('/api/categories/:id', auth, async (req, res) => {
 	}
 });
 
+router.patch('/api/categories/:id', auth, async (req, res) => {
+	const _id = req.params.id;
+
+	try {
+		let updated;
+		if (_id === 'all') {
+			const categories = await Category.find();
+			console.log(categories);
+			updated = categories.map((cat) => { return { name: { ...cat.name }, ...req.body }; });
+			console.log(updated);
+		} else {
+			const category = await Category.findOne({ _id });
+			if (!category) {
+				throw new Error('No category found!');
+			}
+			updated = { name: { ...category.name, ...req.body } };
+		}
+		HelperService.handleSuccess(res, updated, 200);
+	} catch (error) {
+		HelperService.handleError(res, error, 400);
+	}
+});
+
 router.delete('/api/categories/:id', auth, async (req, res) => {
 	const _id = req.params.id;
 	try {
