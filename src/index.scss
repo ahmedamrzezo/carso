@@ -45,6 +45,10 @@
 			@apply font-bold text-3xl border-b-2 border-primary_color_50 pb-6 capitalize;
 		}
 	}
+
+	.link {
+		@apply text-primary_color hover:underline transition-colors text-2xl;
+	}
 }
 
 html {
