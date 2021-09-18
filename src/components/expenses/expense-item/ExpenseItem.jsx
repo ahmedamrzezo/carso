@@ -21,13 +21,13 @@ export default function ExpenseItem({ expense, empty, onAddNewExpenseComp }) {
 			<div className="max-w-65">
 				<h4 className="text-primary_color font-semibold">{expense.title}</h4>
 				<p className="text-3xl">{expense.description}</p>
-				<p className="text-2xl capitalize mt-2 text-secondary_color">
+				<p className="text-2xl capitalize mt-2 text-secondary_color font-semibold">
 					{expense.category.name.en}
 				</p>
 			</div>
 			<ExpenseDate date={expense.date} />
 			<div className="flex-grow w-full text-center">
-				<mark className="rounded-xl p-2 bg-primary_color text-primary_light_color ring-4 ring-primary_color_50 inline-block">
+				<mark className="rounded-xl p-2 bg-secondary_color text-primary_light_color ring-4 ring-primary_color_50 inline-block">
 					${expense.amount}
 				</mark>
 			</div>

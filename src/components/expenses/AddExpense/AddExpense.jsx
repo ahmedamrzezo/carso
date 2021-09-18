@@ -6,7 +6,7 @@ import { getFormValues } from '../../shared/utils/Form';
 import { useContext } from 'react';
 import CategoriesContext from '../../../store/categories-context';
 
-export const AddExpense = ({ id, onExpenseAdd }) => {
+export const AddExpense = ({ id, onExpenseAdd, cancelNewExpense }) => {
 	const categoriesCtx = useContext(CategoriesContext);
 
 	const formSubmitted = (ev) => {
@@ -70,11 +70,11 @@ export const AddExpense = ({ id, onExpenseAdd }) => {
 				<CalendarIcon />
 			</ExpenseDate>
 			<div className="flex-grow w-full text-center flex justify-between">
-				<mark className="rounded-xl p-2 bg-primary_color text-primary_light_color ring-4 ring-primary_color_50 inline-block">
+				<mark className="rounded-xl p-2 bg-secondary_color text-primary_light_color ring-4 ring-primary_color_50 inline-block">
 					<div className="form-group">
 						${' '}
 						<input
-							className="form-control mx-2 border-primary_light_color text-primary_light_color h-full"
+							className="form-control mx-2 border-primary_light_color focus:border-primary_light_color text-primary_light_color h-full placeholder-primary_light_color"
 							type="number"
 							placeholder="Enter amount"
 							name="amount"
@@ -82,6 +82,15 @@ export const AddExpense = ({ id, onExpenseAdd }) => {
 					</div>
 				</mark>
 
+				<Button
+					className="ml-auto mr-12"
+					btnType="text"
+					haveHover={false}
+					type="button"
+					clickHandler={cancelNewExpense}
+				>
+					cancel
+				</Button>
 				<Button btnType="bordered" type="submit">
 					done
 				</Button>

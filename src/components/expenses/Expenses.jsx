@@ -19,6 +19,8 @@ function Expenses() {
 				params,
 			});
 			setExpenses(expenses ?? []);
+
+			categoriesCtx.getCategories();
 		},
 		[fetchExpenses]
 	);
@@ -35,8 +37,6 @@ function Expenses() {
 			editable: true,
 		};
 		setExpenses([...expenses, newExpense]);
-
-		categoriesCtx.getCategories();
 	};
 
 	const [, , addExpense] = useHttp();
@@ -59,6 +59,10 @@ function Expenses() {
 		getExpenses({ filter: JSON.stringify(filter) });
 	};
 
+	const removeNewExpense = () => {
+		setExpenses((exps) => exps.filter((exp) => typeof exp.id !== 'number'));
+	};
+
 	return (
 		<section>
 			<h1 className="mb-16">Expenses List</h1>
@@ -69,6 +73,7 @@ function Expenses() {
 				<ExpensesList
 					expenses={expenses}
 					onInsertExpense={insertExpense}
+					cancelNewExpense={removeNewExpense}
 					onAddNew={addNewExpense}
 				/>
 			)}
