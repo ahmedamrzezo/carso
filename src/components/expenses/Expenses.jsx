@@ -59,9 +59,8 @@ function Expenses() {
 		getExpenses({ filter: JSON.stringify(filter) });
 	};
 
-	const removeNewExpense = () => {
-		setExpenses((exps) => exps.filter((exp) => typeof exp.id !== 'number'));
-	};
+	const removeNewExpense = (id) =>
+		setExpenses((exps) => exps.filter((exp) => exp.id !== id));
 
 	return (
 		<section>

@@ -83,11 +83,11 @@ export const AddExpense = ({ id, onExpenseAdd, cancelNewExpense }) => {
 				</mark>
 
 				<Button
-					className="ml-auto mr-12"
+					className="ml-auto mr-12 text-danger"
 					btnType="text"
 					haveHover={false}
 					type="button"
-					clickHandler={cancelNewExpense}
+					clickHandler={cancelNewExpense.bind(null, id)}
 				>
 					cancel
 				</Button>
