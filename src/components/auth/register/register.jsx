@@ -1,9 +1,17 @@
+import values from 'postcss-modules-values';
+import { useContext, useState } from 'react';
+import { Link, Prompt } from 'react-router-dom';
 import { environment } from '../../../environment/environment';
+import AuthContext from '../../../store/auth-context';
 import Button from '../../shared/ui/button/Button';
 import { getFormValues } from '../../shared/utils/Form';
 import { getOptions } from '../../shared/utils/Http';
 
 const Register = () => {
+	const authCtx = useContext(AuthContext);
+
+	const [formActive, setFormActive] = useState(false);
+
 	const register = async (ev) => {
 		ev.preventDefault();
 		const values = getFormValues(ev.target.elements, [
@@ -24,15 +32,19 @@ const Register = () => {
 		});
 
 		const userData = await res.json();
-
-		localStorage.setItem('user', JSON.stringify(userData));
+		if (res.ok) authCtx.loginHandler(userData);
 	};
 
 	return (
 		<section>
 			<h2>Sign Up</h2>
 
-			<form onSubmit={register}>
+			<Prompt
+				when={values && formActive}
+				message={(location) => 'Are you sure you want to leave the page?'}
+			/>
+
+			<form onFocus={setFormActive.bind(null, true)} onSubmit={register}>
 				{/* name */}
 				<div className="grid grid-cols-2 gap-4">
 					<div className="form-group">
@@ -94,6 +106,10 @@ const Register = () => {
 						/>
 					</div>
 				</div>
+
+				<Link className="link" to="/login">
+					Or login?
+				</Link>
 
 				<Button className="mt-4" btnType="primary" type="submit">
 					Let's do this

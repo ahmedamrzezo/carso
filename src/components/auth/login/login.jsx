@@ -1,4 +1,5 @@
 import { useContext, useReducer } from 'react';
+import { Link } from 'react-router-dom';
 import { environment } from '../../../environment/environment';
 import AuthContext from '../../../store/auth-context';
 import Button from '../../shared/ui/button/Button';
@@ -41,10 +42,7 @@ const Login = () => {
 		});
 
 		const userData = await res.json();
-
-		authCtx.loginHandler();
-
-		localStorage.setItem('user', JSON.stringify(userData));
+		if (res.ok) authCtx.loginHandler(userData);
 	};
 
 	const [formState, dispatchEmail] = useReducer(reducer, {
@@ -117,6 +115,10 @@ const Login = () => {
 							: false
 					}
 				/>
+
+				<Link className="link" to="/register">
+					Or register?
+				</Link>
 
 				<Button className="mt-4" btnType="primary" type="submit">
 					Let's go
