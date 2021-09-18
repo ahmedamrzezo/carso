@@ -6,11 +6,11 @@ export default function ExpenseItem({ expense, empty, onAddNewExpenseComp }) {
 	if (empty) {
 		return (
 			<div
-				className="rounded-xl flex justify-center items-center border-4 border-dashed border-primary_color cursor-pointer"
+				className="rounded-xl flex justify-center items-center border-4 border-dashed border-secondary_color cursor-pointer"
 				onClick={onAddNewExpenseComp}
 			>
-				<span className="text-8xl border-4 border-dashed border-primary_color w-40 h-40 rounded-full flex justify-center items-center text-primary_color my-20">
-					<PlusIcon className="w-16 text-primary_color"></PlusIcon>
+				<span className="text-8xl border-4 border-dashed border-secondary_color w-40 h-40 rounded-full flex justify-center items-center text-primary_color my-20">
+					<PlusIcon className="w-16 text-secondary_color"></PlusIcon>
 				</span>
 			</div>
 		);
