@@ -49,6 +49,13 @@
 	.link {
 		@apply text-primary_color hover:underline transition-colors text-2xl;
 	}
+
+	.w-100vw {
+		width: 100vw;
+	}
+	.h-100vh {
+		height: 100vh;
+	}
 }
 
 html {

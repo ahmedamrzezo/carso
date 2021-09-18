@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import useHttp from '../../hooks/use-http';
+import Spinner from '../shared/ui/spinner/Spinner';
 import DashboardCard from './dashboard-card/DashboardCard';
 
 const Dashboard = () => {
@@ -25,7 +26,7 @@ const Dashboard = () => {
 			</p>
 
 			<div className="section__content grid grid-cols-2 gap-x-6 gap-y-12">
-				{categoriesLoading && 'Loading...'}
+				{categoriesLoading && <Spinner></Spinner>}
 				{!categoriesLoading &&
 					categories.map((cat) => (
 						<DashboardCard
