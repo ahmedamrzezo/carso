@@ -67,7 +67,9 @@ export const AddExpense = ({ id, onExpenseAdd, cancelNewExpense }) => {
 				</div>
 			</div>
 			<ExpenseDate>
-				<CalendarIcon />
+				<label htmlFor="date" className="block">
+					<CalendarIcon className="w-40" />
+				</label>
 			</ExpenseDate>
 			<div className="flex-grow w-full text-center flex justify-between">
 				<mark className="rounded-xl p-2 bg-secondary_color text-primary_light_color ring-4 ring-primary_color_50 inline-block">

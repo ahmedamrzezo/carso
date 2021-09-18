@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import './ExpenseDate.scss';
 
 function ExpenseDate({ children, date }) {
@@ -7,12 +8,15 @@ function ExpenseDate({ children, date }) {
 
 	return (
 		<div className="bg-primary_light_color flex flex-wrap items-center justify-center p-4 w-48 h-48 rounded-xl">
-			{date &&
-				<div>
+			{date && (
+				<Fragment>
 					<span className="font-bold w-full text-center text-8xl">{day}</span>
 					<br />
-					<span className="text-4xl text-gray-500">{month} {year}</span>
-				</div>}
+					<span className="text-4xl text-gray-500">
+						{month} {year}
+					</span>
+				</Fragment>
+			)}
 			{!date && children}
 		</div>
 	);
