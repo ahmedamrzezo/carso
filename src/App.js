@@ -8,6 +8,8 @@ import { useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Main from './layout/main/Main';
 import Dashboard from './components/dashboard/Dashboard';
+import Register from './components/auth/register/register';
+import Profile from './components/profile/Profile';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -20,6 +22,12 @@ function App() {
         <Switch>
           <Redirect path="/" to="/dashboard" exact />
 
+          <Route path="/dashboard" component={Dashboard} />
+
+          <Route path="/expenses" component={Expenses} />
+
+          <Route path="/profile" component={Profile} />
+
           <Route path="/login">
             {
               !authCtx.isLogged &&
@@ -31,9 +39,16 @@ function App() {
             }
           </Route>
 
-          <Route path="/dashboard" component={Dashboard} />
-
-          <Route path="/expenses" component={Expenses} />
+          <Route path="/register">
+            {
+              !authCtx.isLogged &&
+              <Register />
+            }
+            {
+              authCtx.isLogged &&
+              <Redirect to="/dashboard" />
+            }
+          </Route>
 
           <Route path="/404">
             Not Found
