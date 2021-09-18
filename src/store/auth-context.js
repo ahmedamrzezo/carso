@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
 const AuthContext = React.createContext({
@@ -10,23 +10,25 @@ const AuthContext = React.createContext({
 export const AuthContextProvider = ({ children }) => {
 	const [isLogged, setIsLogged] = useState(false);
 
+	const navigate = useHistory();
+
+	const loginHandler = useCallback((data) => {
+		setIsLogged(true);
+
+		if (data) {
+			localStorage.setItem('user', JSON.stringify(data));
+		}
+
+		navigate.push('/expenses');
+
+	}, [navigate]);
+
 	useEffect(() => {
 		const userData = JSON.parse(localStorage.getItem('user')) || {};
 		if (userData.token) {
 			loginHandler();
 		}
-	}, []);
-
-	const navigate = useHistory();
-
-	const loginHandler = (data) => {
-		setIsLogged(true);
-
-		localStorage.setItem('user', JSON.stringify(data));
-
-		navigate.push('/expenses');
-
-	};
+	}, [loginHandler]);
 
 	const logoutHandler = () => {
 		localStorage.removeItem('user');
