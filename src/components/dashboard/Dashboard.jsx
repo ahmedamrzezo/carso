@@ -5,7 +5,7 @@ import DashboardCard from './dashboard-card/DashboardCard';
 const Dashboard = () => {
 	const [categories, setCategories] = useState([]);
 
-	const [categoriesLoading, error, fetchCategories] = useHttp();
+	const [categoriesLoading, , fetchCategories] = useHttp();
 
 	const getCategories = useCallback(async () => {
 		const categs = await fetchCategories({

@@ -1,17 +1,27 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import useHttp from '../../hooks/use-http';
-import { Filter } from "../shared/filter/Filter";
-import { ExpensesList } from "./expenses-list/ExpensesList";
+import CategoriesContext from '../../store/categories-context';
+import { Filter } from '../shared/filter/Filter';
+import { ExpensesList } from './expenses-list/ExpensesList';
 
 function Expenses() {
 	const [expenses, setExpenses] = useState([]);
 
-	const [expensesLoading, error, fetchExpenses] = useHttp();
+	const [expensesLoading, , fetchExpenses] = useHttp();
 
-	const getExpenses = useCallback(async (params = { category: true }) => {
-		const expenses = await fetchExpenses({ endpoint: '/expenses', method: 'GET', params });
-		setExpenses(expenses ?? []);
-	}, [fetchExpenses]);
+	const categoriesCtx = useContext(CategoriesContext);
+
+	const getExpenses = useCallback(
+		async (params = { category: true }) => {
+			const expenses = await fetchExpenses({
+				endpoint: '/expenses',
+				method: 'GET',
+				params,
+			});
+			setExpenses(expenses ?? []);
+		},
+		[fetchExpenses]
+	);
 
 	useEffect(() => getExpenses(), [getExpenses]);
 
@@ -22,12 +32,14 @@ function Expenses() {
 			title: '',
 			description: '',
 			id: new Date().getTime(),
-			editable: true
+			editable: true,
 		};
 		setExpenses([...expenses, newExpense]);
+
+		categoriesCtx.getCategories();
 	};
 
-	const [addLoading, addError, addExpense] = useHttp();
+	const [, , addExpense] = useHttp();
 
 	const insertExpense = async (expense, id) => {
 		const data = await addExpense({
@@ -42,7 +54,7 @@ function Expenses() {
 		const filter = {};
 		filter['date'] = {
 			$gt: new Date(year).toJSON(),
-			$lt: new Date((+year + 1) + '').toJSON()
+			$lt: new Date(+year + 1 + '').toJSON(),
 		};
 		getExpenses({ filter: JSON.stringify(filter) });
 	};
@@ -53,10 +65,13 @@ function Expenses() {
 
 			<Filter onFilter={filterExpenses} />
 
-			{!expensesLoading && <ExpensesList
-				expenses={expenses}
-				onInsertExpense={insertExpense}
-				onAddNew={addNewExpense} />}
+			{!expensesLoading && (
+				<ExpensesList
+					expenses={expenses}
+					onInsertExpense={insertExpense}
+					onAddNew={addNewExpense}
+				/>
+			)}
 		</section>
 	);
 }

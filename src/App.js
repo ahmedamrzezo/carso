@@ -10,6 +10,7 @@ import Main from './layout/main/Main';
 import Dashboard from './components/dashboard/Dashboard';
 import Register from './components/auth/register/register';
 import Profile from './components/profile/Profile';
+import { CategoriesContextProvider } from './store/categories-context';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -22,11 +23,15 @@ function App() {
         <Switch>
           <Redirect path="/" to="/dashboard" exact />
 
-          <Route path="/dashboard" component={Dashboard} />
+          <CategoriesContextProvider>
 
-          <Route path="/expenses" component={Expenses} />
+            <Route path="/dashboard" component={Dashboard} />
 
-          <Route path="/profile" component={Profile} />
+            <Route path="/expenses" component={Expenses} />
+
+            <Route path="/profile" component={Profile} />
+
+          </CategoriesContextProvider>
 
           <Route path="/login">
             {
