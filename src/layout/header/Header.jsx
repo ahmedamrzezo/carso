@@ -29,7 +29,9 @@ function Header() {
 					}
 					{
 						!authCtx.isLogged &&
-						<Button btnType="primary" size="small" haveHover={false}>Login</Button>
+						<NavLink className="nav-links__link-item" to="/login">
+							<Button btnType="primary" size="small" haveHover={false}>Login</Button>
+						</NavLink>
 					}
 				</nav>
 			</div>
