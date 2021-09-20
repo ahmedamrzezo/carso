@@ -1,15 +1,13 @@
 import './App.scss';
 import Header from './layout/header/Header';
 import Footer from './layout/footer/Footer';
-import Expenses from './components/expenses/Expenses';
 import Login from './components/auth/login/login';
 import AuthContext from './store/auth-context';
-import { useContext } from 'react';
+import React, { useContext, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Main from './layout/main/Main';
-import Dashboard from './components/dashboard/Dashboard';
 import Register from './components/auth/register/register';
-import Profile from './components/profile/Profile';
+import Spinner from './components/shared/ui/spinner/Spinner';
 import { CategoriesContextProvider } from './store/categories-context';
 
 function App() {
@@ -20,47 +18,49 @@ function App() {
       <Header />
 
       <Main>
-        <Switch>
-          <Redirect path="/" to="/dashboard" exact />
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Redirect path="/" to="/dashboard" exact />
 
-          <CategoriesContextProvider>
+            <CategoriesContextProvider>
 
-            <Route path="/dashboard" component={Dashboard} />
+              <Route path="/dashboard" component={React.lazy(() => import('./components/dashboard/Dashboard'))} />
 
-            <Route path="/expenses" component={Expenses} />
+              <Route path="/expenses" component={React.lazy(() => import('./components/expenses/Expenses'))} />
 
-            <Route path="/profile" component={Profile} />
+              <Route path="/profile" component={React.lazy(() => import('./components/profile/Profile'))} />
 
-          </CategoriesContextProvider>
+            </CategoriesContextProvider>
 
-          <Route path="/login">
-            {
-              !authCtx.isLogged &&
-              <Login />
-            }
-            {
-              authCtx.isLogged &&
-              <Redirect to="/dashboard" />
-            }
-          </Route>
+            <Route path="/login">
+              {
+                !authCtx.isLogged &&
+                <Login />
+              }
+              {
+                authCtx.isLogged &&
+                <Redirect to="/dashboard" />
+              }
+            </Route>
 
-          <Route path="/register">
-            {
-              !authCtx.isLogged &&
-              <Register />
-            }
-            {
-              authCtx.isLogged &&
-              <Redirect to="/dashboard" />
-            }
-          </Route>
+            <Route path="/register">
+              {
+                !authCtx.isLogged &&
+                <Register />
+              }
+              {
+                authCtx.isLogged &&
+                <Redirect to="/dashboard" />
+              }
+            </Route>
 
-          <Route path="/404">
-            Not Found
-          </Route>
+            <Route path="/404">
+              Not Found
+            </Route>
 
-          <Redirect path="*" to="/404" />
-        </Switch>
+            <Redirect path="*" to="/404" />
+          </Switch>
+        </Suspense>
       </Main>
 
       <Footer />

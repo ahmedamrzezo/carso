@@ -26,7 +26,7 @@ const Dashboard = () => {
 			</p>
 
 			<div className="section__content grid grid-cols-2 gap-x-6 gap-y-12">
-				{categoriesLoading && <Spinner></Spinner>}
+				{categoriesLoading && <Spinner />}
 				{!categoriesLoading &&
 					categories.map((cat) => (
 						<DashboardCard
