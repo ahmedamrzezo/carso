@@ -20,6 +20,12 @@ function App() {
       <Main>
         <Suspense fallback={<Spinner />}>
           <Switch>
+
+            {
+              !authCtx.isLogged &&
+              <Redirect to="/login" />
+            }
+
             <Redirect path="/" to="/dashboard" exact />
 
             <CategoriesContextProvider>
