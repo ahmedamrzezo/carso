@@ -16,7 +16,7 @@ const Button = ({
 		small: 'w-32 h-16',
 		dynamic: 'px-8 py-3'
 	};
-	const hoverClasses = 'transform hover:-translate-y-2 transition-all' + shadow;
+	const hoverClasses = 'transform hover:-translate-y-2 transition-all ' + shadow;
 
 	const types = {
 		primary: `rounded-xl bg-primary_color text-white ${sizes[size]}`,
@@ -24,7 +24,7 @@ const Button = ({
 		text: `p-4 text-primary_color`
 	};
 
-	let classes = `font-semibold text-2xl flex items-center justify-center capitalize cursor-pointer m delay-75 ${types[btnType]} ${haveHover && hoverClasses} ${className}`;
+	let classes = `font-semibold text-2xl flex items-center justify-center capitalize cursor-pointer delay-75 ${types[btnType]} ${haveHover && hoverClasses} ${className}`;
 
 	return (
 		<button className={classes} onClick={clickHandler} type={type}>

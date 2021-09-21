@@ -2,13 +2,19 @@ const colors = require('tailwindcss/colors');
 
 module.exports = {
   // mode: 'jit',
-  purge: [
-    './src/*.{js,jsx}',
-    './src/components/**/**/*.{js,jsx}',
-    './src/components/shared/**/**/*.{js,jsx}',
-    './src/layout/**/*.{js,jsx}',
-    './public/index.html'
-  ],
+  purge: {
+    content: [
+      './src/*.{js,jsx}',
+      './src/components/**/**/*.{js,jsx}',
+      './src/components/shared/**/**/*.{js,jsx}',
+      './src/layout/**/*.{js,jsx}',
+      './public/index.html',
+
+    ],
+    safeList: [
+      'transform', 'hover:-translate-y-2', 'transition-all'
+    ]
+  },
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     maxWidth: {

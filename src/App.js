@@ -23,7 +23,7 @@ function App() {
 
             {
               !authCtx.isLogged &&
-              <Redirect to="/login" />
+              <Login />
             }
 
             <Redirect path="/" to="/dashboard" exact />
