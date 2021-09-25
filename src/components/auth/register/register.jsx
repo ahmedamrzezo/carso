@@ -32,7 +32,7 @@ const Register = () => {
 		});
 
 		const userData = await res.json();
-		if (res.ok) authCtx.loginHandler(userData);
+		if (res.ok) authCtx.loginHandler(userData, true);
 	};
 
 	return (

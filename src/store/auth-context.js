@@ -12,14 +12,15 @@ export const AuthContextProvider = ({ children }) => {
 
 	const navigate = useHistory();
 
-	const loginHandler = useCallback((data) => {
+	const loginHandler = useCallback((data, redirect = false) => {
 		setIsLogged(true);
 
 		if (data) {
 			localStorage.setItem('user', JSON.stringify(data));
 		}
 
-		navigate.push('/expenses');
+		if (redirect)
+			navigate.push('/expenses');
 
 	}, [navigate]);
 
