@@ -3,12 +3,13 @@ import Header from './layout/header/Header';
 import Footer from './layout/footer/Footer';
 import Login from './components/auth/login/login';
 import AuthContext from './store/auth-context';
-import React, { useContext, Suspense } from 'react';
+import { useContext, Suspense, lazy } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Main from './layout/main/Main';
 import Register from './components/auth/register/register';
 import Spinner from './components/shared/ui/spinner/Spinner';
 import { CategoriesContextProvider } from './store/categories-context';
+import Home from './components/home/Home';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -26,15 +27,15 @@ function App() {
               <Login />
             }
 
-            <Redirect path="/" to="/dashboard" exact />
+            <Route path="/" component={Home} exact />
 
             <CategoriesContextProvider>
 
-              <Route path="/dashboard" component={React.lazy(() => import('./components/dashboard/Dashboard'))} />
+              <Route path="/dashboard" component={lazy(() => import('./components/dashboard/Dashboard'))} />
 
-              <Route path="/expenses" component={React.lazy(() => import('./components/expenses/Expenses'))} />
+              <Route path="/expenses" component={lazy(() => import('./components/expenses/Expenses'))} />
 
-              <Route path="/profile" component={React.lazy(() => import('./components/profile/Profile'))} />
+              <Route path="/profile" component={lazy(() => import('./components/profile/Profile'))} />
 
             </CategoriesContextProvider>
 
