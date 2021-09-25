@@ -35,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
 		localStorage.removeItem('user');
 		setIsLogged(false);
 
-		navigate.push('/login');
+		navigate.push('/');
 	};
 
 	return <AuthContext.Provider value={{ isLogged, loginHandler, logoutHandler }}>{children}</AuthContext.Provider>;
