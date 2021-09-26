@@ -36,15 +36,19 @@ const Register = () => {
 	};
 
 	return (
-		<section>
-			<h2>Sign Up</h2>
+		<section className="section auth-container">
+			<h2 className="section__title">Sign Up</h2>
 
 			<Prompt
 				when={values && formActive}
 				message={(location) => 'Are you sure you want to leave the page?'}
 			/>
 
-			<form onFocus={setFormActive.bind(null, true)} onSubmit={register}>
+			<form
+				className="mt-8"
+				onFocus={setFormActive.bind(null, true)}
+				onSubmit={register}
+			>
 				{/* name */}
 				<div className="grid grid-cols-2 gap-4">
 					<div className="form-group">

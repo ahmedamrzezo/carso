@@ -68,10 +68,10 @@ const Login = () => {
 	};
 
 	return (
-		<section>
-			<h2>Login</h2>
+		<section className="section auth-container">
+			<h2 className="section__title">Login</h2>
 
-			<form onSubmit={login}>
+			<form className="form mt-8" onSubmit={login}>
 				{/* email */}
 
 				<FormField
