@@ -22,22 +22,12 @@ function App() {
         <Suspense fallback={<Spinner />}>
           <Switch>
 
-            {
+            {/* {
               !authCtx.isLogged &&
               <Login />
-            }
+            } */}
 
             <Route path="/" component={Home} exact />
-
-            <CategoriesContextProvider>
-
-              <Route path="/dashboard" component={lazy(() => import('./components/dashboard/Dashboard'))} />
-
-              <Route path="/expenses" component={lazy(() => import('./components/expenses/Expenses'))} />
-
-              <Route path="/profile" component={lazy(() => import('./components/profile/Profile'))} />
-
-            </CategoriesContextProvider>
 
             <Route path="/login">
               {
@@ -61,11 +51,22 @@ function App() {
               }
             </Route>
 
-            <Route path="/404">
-              Not Found
-            </Route>
+            <CategoriesContextProvider>
 
-            <Redirect path="*" to="/404" />
+              <Route path="/dashboard" component={lazy(() => import('./components/dashboard/Dashboard'))} />
+
+              <Route path="/expenses" component={lazy(() => import('./components/expenses/Expenses'))} />
+
+              <Route path="/profile" component={lazy(() => import('./components/profile/Profile'))} />
+
+              <Redirect path="*" to="/404" />
+
+              <Route path="/404">
+                Not Found
+              </Route>
+
+            </CategoriesContextProvider>
+
           </Switch>
         </Suspense>
       </Main>
