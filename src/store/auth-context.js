@@ -8,7 +8,7 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = ({ children }) => {
-	const [isLogged, setIsLogged] = useState(false);
+	const [isLogged, setIsLogged] = useState(!!localStorage.getItem('user'));
 
 	const navigate = useHistory();
 
