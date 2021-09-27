@@ -28,11 +28,11 @@ const useHttp = () => {
 				headers
 			);
 
-			if (!res.ok) {
-				throw new Error(res);
-			}
-
 			const data = await res.json();
+
+			if (!res.ok) {
+				throw new Error(data.error.message);
+			}
 
 			setLoading(false);
 
@@ -40,7 +40,7 @@ const useHttp = () => {
 
 		} catch (error) {
 			console.error(error);
-			setError(error.message ?? 'Something went bad!');
+			setError(error ?? 'Something went bad!');
 
 			setLoading(false);
 		}

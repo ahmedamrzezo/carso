@@ -6,7 +6,7 @@ import DashboardCard from './dashboard-card/DashboardCard';
 const Dashboard = () => {
 	const [categories, setCategories] = useState([]);
 
-	const [categoriesLoading, , fetchCategories] = useHttp();
+	const [categoriesLoading, errorObj, fetchCategories] = useHttp();
 
 	const getCategories = useCallback(async () => {
 		const categs = await fetchCategories({
@@ -27,7 +27,9 @@ const Dashboard = () => {
 
 			<div className="section__content grid grid-cols-2 gap-x-6 gap-y-12">
 				{categoriesLoading && <Spinner />}
+				{errorObj ? errorObj.toString() : null}
 				{!categoriesLoading &&
+					!errorObj &&
 					categories.map((cat) => (
 						<DashboardCard
 							key={cat.id}
