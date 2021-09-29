@@ -8,6 +8,7 @@ const LanguageSwitch = () => {
 	);
 
 	const [, i18n] = useTranslation();
+
 	const changeLang = () => {
 		setActiveLang((lang) => {
 			if (lang === 'en') return 'ar';
@@ -18,7 +19,7 @@ const LanguageSwitch = () => {
 	};
 	return (
 		<Button
-			size="dynamic"
+			size="icon"
 			haveHover={false}
 			btnType="dotted"
 			clickHandler={changeLang}

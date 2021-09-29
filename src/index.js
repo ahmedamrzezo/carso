@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { AuthContextProvider } from './store/auth-context';
 import { BrowserRouter } from 'react-router-dom';
 
+import './i18n';
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

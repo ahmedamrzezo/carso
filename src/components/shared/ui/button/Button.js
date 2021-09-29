@@ -14,6 +14,7 @@ const Button = ({
 	const sizes = {
 		default: 'w-48 h-20',
 		small: 'w-32 h-16',
+		icon: 'w-20 h-16',
 		dynamic: 'px-8 py-3'
 	};
 	const hoverClasses = 'transform hover:-translate-y-2 transition-all ' + shadow;
