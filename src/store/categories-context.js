@@ -20,7 +20,7 @@ export const CategoriesContextProvider = ({ children }) => {
 		setCategories(categories);
 	}, [fetchCategories]);
 
-	const [contextVal, setContextVal] = useState({ categories, getCategories });
+	const [contextVal] = useState({ categories, getCategories });
 
 	return <CategoriesContext.Provider value={contextVal}>{children}</CategoriesContext.Provider>;
 };
