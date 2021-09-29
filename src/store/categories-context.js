@@ -7,6 +7,7 @@ const CategoriesContext = React.createContext({
 });
 
 export const CategoriesContextProvider = ({ children }) => {
+
 	const [categories, setCategories] = useState([]);
 
 	const [, , fetchCategories] = useHttp();
@@ -19,7 +20,9 @@ export const CategoriesContextProvider = ({ children }) => {
 		setCategories(categories);
 	}, [fetchCategories]);
 
-	return <CategoriesContext.Provider value={{ categories, getCategories }}>{children}</CategoriesContext.Provider>;
+	const [contextVal, setContextVal] = useState({ categories, getCategories });
+
+	return <CategoriesContext.Provider value={contextVal}>{children}</CategoriesContext.Provider>;
 };
 
 export default CategoriesContext;

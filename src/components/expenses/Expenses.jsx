@@ -22,7 +22,7 @@ function Expenses() {
 
 			categoriesCtx.getCategories();
 		},
-		[fetchExpenses]
+		[fetchExpenses, categoriesCtx]
 	);
 
 	useEffect(() => getExpenses(), [getExpenses]);
