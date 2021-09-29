@@ -16,16 +16,13 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Suspense fallback={<Spinner />}>
+        <Header />
+      </Suspense>
 
       <Main>
         <Suspense fallback={<Spinner />}>
           <Switch>
-
-            {/* {
-              !authCtx.isLogged &&
-              <Login />
-            } */}
 
             <Route path="/" component={Home} exact />
 
@@ -59,13 +56,11 @@ function App() {
 
               <Route path="/profile" component={lazy(() => import('./components/profile/Profile'))} />
 
-              <Redirect path="*" to="/404" />
-
-              <Route path="/404">
-                Not Found
-              </Route>
-
             </CategoriesContextProvider>
+
+            <Route path="*" >
+              Not Found
+            </Route>
 
           </Switch>
         </Suspense>
