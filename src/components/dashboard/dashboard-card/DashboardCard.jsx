@@ -5,7 +5,9 @@ const DashboardCard = ({ title, dataSource }) => {
 
 			<div className="flex flex-col gap-y-4 mt-12">
 				{dataSource.map((data) => (
-					<div className="">{data}</div>
+					<div key={data} className="">
+						{data}
+					</div>
 				))}
 			</div>
 		</div>
