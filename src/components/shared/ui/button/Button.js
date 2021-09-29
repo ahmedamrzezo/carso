@@ -21,6 +21,7 @@ const Button = ({
 	const types = {
 		primary: `rounded-xl bg-primary_color text-white ${sizes[size]}`,
 		bordered: `rounded-xl border border-primary_color text-primary_color ${sizes[size]} `,
+		dotted: `rounded-xl border-2 border-dotted border-primary_color text-primary_color ${sizes[size]} `,
 		text: `p-4 text-primary_color`
 	};
 
